@@ -45,7 +45,7 @@ def main():
     turtle_instance = turtle.Turtle() 
     
     #set pen width for turtle
-    turtle_instance.width('3')
+    turtle_instance.pensize('3')
 
     #Change angle, so that trunk is drawn vertically
     turtle_instance.left(90) 

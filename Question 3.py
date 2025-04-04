@@ -1,12 +1,5 @@
 import turtle
 
-#Get user inputs
-branch_length = int(input('Enter length of first branch in pixels:'))
-branch_reduction = int(input('Enter percentage (as whole number) to reduce each branch length by:'))
-left_branch_angle = int(input('Enter left branch angle:'))
-right_branch_angle = int(input('Enter right branch angle:'))
-recursion_depth = int(input('Enter number of times to branch:'))
-
 def draw_branch(br_turtle_instance, br_branch_length, br_branch_reduction, br_left_branch_angle, br_right_branch_angle, br_recursion_depth):
     #Once the recursion depth has reached 1, return to previous function
     if br_recursion_depth == 1:
@@ -39,8 +32,16 @@ def draw_branch(br_turtle_instance, br_branch_length, br_branch_reduction, br_le
     
     return
 
+
 def main():
-    
+
+    #Get user inputs
+    branch_length = int(input('Enter length of first branch in pixels:'))
+    branch_reduction = int(input('Enter percentage (as whole number) to reduce each branch length by:'))
+    left_branch_angle = int(input('Enter left branch angle:'))
+    right_branch_angle = int(input('Enter right branch angle:'))
+    recursion_depth = int(input('Enter number of times to branch:'))
+
     #Initiate turtle
     turtle_instance = turtle.Turtle() 
     

@@ -1,4 +1,8 @@
- for char in text: 
+file = open("raw_text.txt", "r")
+def encrypt(text, n, m):
+    encrypted_text = ""
+
+for char in text: 
         if 'a' <= char <= 'z':
             if 'a' <= char <= 'm':
                 new_char = ord(char) + (n * m)

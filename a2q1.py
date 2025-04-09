@@ -14,7 +14,7 @@ def encrypt(text, n, m):
             new_char = char_to_encrypt
 
     encrypted_text += new_char
-return encrypted_text
+    return encrypted_text
 
 def decrypt(text, n, m):
     decrypted_text = ""
@@ -31,7 +31,7 @@ def decrypt(text, n, m):
             new_char = char_to_decrypt
 
     decrypted_text += new_char
-return decrypted_text
+    return decrypted_text
 
 
 def main():

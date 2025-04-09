@@ -1,20 +1,16 @@
 def encrypt(text, n, m):
     encrypted_text = ""
     
-    for char_to_encrypt in text: 
-    if 'a' <= char_to_encrypt <= 'm':
-        new_char = chr(ord('a') + (ord(char_to_encrypt) - ord('a') + (n * m)) % 26)
-   
-    elif 'n' <= char_to_encrypt <= 'z': 
+    for char_to_encrypt in text:
+        if 'a' <= char_to_encrypt <= 'm':
+            new_char = chr(ord('a') + (ord(char_to_encrypt) - ord('a') + (n * m)) % 26)
+        elif 'n' <= char_to_encrypt <= 'z': 
             new_char = chr(ord('a') + (ord(char_to_encrypt) - ord('a') - (n + m)) % 26)
-            
-    elif 'A' <= char_to_encrypt <= 'M':  
+        elif 'A' <= char_to_encrypt <= 'M':  
             new_char = chr(ord('A') + (ord(char_to_encrypt) - ord('A') - n) % 26)
-
-    elif 'N' <= char_to_encrypt <= 'Z':  
+        elif 'N' <= char_to_encrypt <= 'Z':  
             new_char = chr(ord('A') + (ord(char_to_encrypt) - ord('A') + (m**2)) % 26)    
-                
-    else:
+        else:
             new_char = char_to_encrypt
 
     encrypted_text += new_char
@@ -25,17 +21,13 @@ def decrypt(text, n, m):
     for char_to_decrypt in text:
         if 'a' <= char_to_decrypt <= 'm':
             new_char = chr(ord('a') + (ord(char_to_decrypt) - ord('a') - (n * m)) % 26)
-   
-    elif 'n' <= char_to_decrypt <= 'z': 
+        elif 'n' <= char_to_decrypt <= 'z': 
             new_char = chr(ord('a') + (ord(char_to_encrypt) - ord('a') + (n + m)) % 26)
-            
-    elif 'A' <= char_to_decrypt <= 'M':  
+        elif 'A' <= char_to_decrypt <= 'M':  
             new_char = chr(ord('A') + (ord(char_to_decrypt) - ord('A') + n) % 26)
-
-    elif 'N' <= char_to_decrypt <= 'Z':  
+        elif 'N' <= char_to_decrypt <= 'Z':  
             new_char = chr(ord('A') + (ord(char_to_decrypt) - ord('A') - (m**2)) % 26)    
-                
-    else:
+        else:
             new_char = char_to_decrypt
 
     decrypted_text += new_char

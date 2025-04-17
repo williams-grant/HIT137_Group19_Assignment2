@@ -54,6 +54,8 @@ def main():
     n = int(input('Enter the value for n: '))
        
     encrypted_text, key_text = encrypt(original_text, m, n)
+
+    encrypted_file_path = os.path.join(os.path.dirname(__file__), 'encrypted_text.txt'
     with open((os.path.dirname(__file__) + 'encrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(encrypted_text)
             

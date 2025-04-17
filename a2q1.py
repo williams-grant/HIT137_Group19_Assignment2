@@ -1,8 +1,8 @@
 import os
 
 def encrypt(original_text, n, m):
-    encrypted_text = ""
-    key_text = ""
+    encrypted_text = ''
+    key_text = ''
     
     for char_to_encrypt in original_text:
         if 'a' <= char_to_encrypt <= 'm':
@@ -23,7 +23,7 @@ def encrypt(original_text, n, m):
             
         encrypted_text += new_char
         key_text += key_char
-    return encrypted_text
+    return encrypted_text, key_text
 
 def decrypt(encrypted_text, key_text, n, m):
     decrypted_text = ""
@@ -49,8 +49,9 @@ def main():
     file_path = os.path.join(os.path.dirname(__file__), 'raw_text.txt')
     with open(file_path, 'r', encoding='utf-8') as file:
         original_text = file.read()
-    m = int(input("Enter the value for m: "))
-    n = int(input("enter the value for n: "))
+        
+    m = int(input('Enter the value for m: '))
+    n = int(input('Enter the value for n: '))
        
     encrypted_text, key_text = encrypt(original_text, m, n)
     with open(os.path.dirname(__file__) + '\\encrypted_text.txt', 'w', encoding='utf-8') as outfile:

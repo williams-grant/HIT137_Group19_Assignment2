@@ -26,14 +26,14 @@ def encrypt(original_text, n, m):
     return encrypted_text, key_text
 
 def decrypt(encrypted_text, key_text, n, m):
-    decrypted_text = ""
+    decrypted_text = ''
     for char_pos in range(0, len(encrypted_text)):
         char_to_decrypt = encrypted_text[char_pos]
         key_char = key_text[char_pos]
         if key_char == '1':
             new_char = chr(ord('a') + (ord(char_to_decrypt) - ord('a') - (n * m)) % 26)
         elif key_char == '2': 
-            new_char = chr(ord('a') + (ord(char_to_encrypt) - ord('a') + (n + m)) % 26)
+            new_char = chr(ord('a') + (ord(char_to_decrypt) - ord('a') + (n + m)) % 26)
         elif key_char == '3':  
             new_char = chr(ord('A') + (ord(char_to_decrypt) - ord('A') + n) % 26)
         elif key_char == '4':  
@@ -54,11 +54,11 @@ def main():
     n = int(input('Enter the value for n: '))
        
     encrypted_text, key_text = encrypt(original_text, m, n)
-    with open(os.path.dirname(__file__) + 'encrypted_text.txt'), 'w', encoding='utf-8') as outfile:
+    with open((os.path.dirname(__file__) + 'encrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(encrypted_text)
             
     decrypted_text = decrypt(encrypted_text, key_text, m, n)
-    with open(os.path.dirname(__file__) + 'decrypted_text.txt'), 'w', encoding='utf-8') as outfile:
+    with open((os.path.dirname(__file__) + 'decrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(decrypted_text)
     
     if original_text == decrypted_text:

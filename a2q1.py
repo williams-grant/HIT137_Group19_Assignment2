@@ -54,11 +54,11 @@ def main():
     n = int(input('Enter the value for n: '))
        
     encrypted_text, key_text = encrypt(original_text, m, n)
-    with open(os.path.dirname(__file__) + '\\encrypted_text.txt', 'w', encoding='utf-8') as outfile:
+    with open(os.path.dirname(__file__) + 'encrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(encrypted_text)
             
     decrypted_text = decrypt(encrypted_text, key_text, m, n)
-    with open(os.path.dirname(__file__) + '\\decrypted_text.txt', 'w', encoding='utf-8') as outfile:
+    with open(os.path.dirname(__file__) + 'decrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(decrypted_text)
     
     if original_text == decrypted_text:

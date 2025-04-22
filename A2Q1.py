@@ -105,7 +105,7 @@ def main():
     #Uses our custom dycryption function to reverse the encryption, as defined above
     decrypted_text = decrypt(encrypted_text, key_text, m, n)
 
-    #opens the encrypted 
+    #opens the encrypted text file, to write the decrypted text
     
     with open((os.path.dirname(__file__) + 'decrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(decrypted_text)

@@ -74,7 +74,7 @@ def decrypt(encrypted_text, key_text, n, m):
         #if key code is not 1-4 then return same character in decryption_text
         else:
             new_char = char_to_decrypt
-        #gives resulting decryption string, and returns as decryption_text
+        #gives a resulting decryption string, and returns as decryption_text
         decrypted_text += new_char 
     return decrypted_text
 
@@ -84,23 +84,29 @@ def main():
     file_path = os.path.join(os.path.dirname(__file__), 'raw_text.txt')
     
     #'with' statment ensures file is closed after function completed - even if error occurs reduces chance of data loss
-    #Find and open file, reads file using 'utf-8' character set to interpret characters then stores information into the variable 'original_text'. File automatically closed
+    #Find and open file, reads file using 'utf-8' character set to interpret characters then stores information in the variable 'original_text'. File automatically closed
     with open(file_path, 'r', encoding='utf-8') as file:
         original_text = file.read()
 
-    #asks user to input value for m and n as an interger
+    #asks user to input value for m and n as an interger - which are used as parameters for the encryption function
     m = int(input('Enter the value for m: '))
     n = int(input('Enter the value for n: '))
 
-    #uses our custom encryption function
+    #uses our custom encryption function as defined above
     encrypted_text, key_text = encrypt(original_text, m, n)
 
-    #
+    #creates a path for the function to save the the encrypted text and code text in the same folder as the script
     encrypted_file_path = os.path.join(os.path.dirname(__file__), 'encrypted_text.txt')
+
+    #opens the original text file, writes the encryption with UTF-8 character set then saves encyrpted original text as 'encrypted_text'
     with open((os.path.dirname(__file__) + 'encrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(encrypted_text)
-            
+        
+    #Uses our custom dycryption function to reverse the encryption, as defined above
     decrypted_text = decrypt(encrypted_text, key_text, m, n)
+
+    #opens the encrypted 
+    
     with open((os.path.dirname(__file__) + 'decrypted_text.txt'), 'w', encoding='utf-8') as outfile:
         outfile.write(decrypted_text)
     

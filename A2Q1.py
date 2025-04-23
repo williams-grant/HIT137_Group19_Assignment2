@@ -1,5 +1,5 @@
 #Assignment 2 Q1
-#Read a raw text file, envrypt text create new file, then decrypte and check decryption returns original text
+#Read a raw text file, encrypt text create new file, then decrypt and check decryption returns original text
 
 #import os scipt to allow program to search for raw_text.txt and create and name file once encrypted and decrypted
 import os
@@ -78,9 +78,10 @@ def decrypt(encrypted_text, key_text, n, m):
 
 
 def readFile(directory, filename):
-    #build os filepath using directory and filename passed
+    #Build os filepath using directory and filename passed
     file_to_read = os.path.join(directory, filename)
-    #'with' statment ensures file is closed after function completed - even if error occurs reduces chance of data loss
+    #'with' statement ensures file is closed after function completed - even if error occurs reduces chance of data loss
+    #opens file in read mode with UTF-8 encoding language
     with open(file_to_read, 'r', encoding='utf-8') as file:
         return file.read()
 

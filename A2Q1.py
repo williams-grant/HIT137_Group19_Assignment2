@@ -46,7 +46,6 @@ def encrypt(original_text, n, m):
     return encrypted_text, key_text
 
 
-
 #Use decrypt function to decrypt 'encrypted_text' file and key codes in key_text to indicate which decryption logic to use 
 def decrypt(encrypted_text, key_text, n, m):
     decrypted_text = '' #stores decrypted text
@@ -79,58 +78,80 @@ def decrypt(encrypted_text, key_text, n, m):
     return decrypted_text
 
 
-def main():
-    #Builds full path for program to search for file 'raw_text.txt' in same folder as script. No matter where the user runs from
-    file_path = os.path.join(os.path.dirname(__file__), 'raw_text.txt')
-    
+def readFile(directory, filename):
+    #build os filepath using directory and filename passed
+    file_to_read = os.path.join(directory, filename)
     #'with' statment ensures file is closed after function completed - even if error occurs reduces chance of data loss
-    #Opens raw_text.txt file in read mode file using 'utf-8' encoding to interpret characters then stores information in the variable 'original_text'. File automatically closed
-    with open(file_path, 'r', encoding='utf-8') as file:
-        original_text = file.read()
+    with open(file_to_read, 'r', encoding='utf-8') as file:
+        return file.read()
 
-    #Asks user to input value for m and n as an interger - which are used as parameters for the encryption function
-    m = int(input('Enter the value for m: '))
-    n = int(input('Enter the value for n: '))
+
+def writeFile(text_to_write, directory, filename):
+    #Save the key_text to a seperate file - in case error occurs still have code to use decryption logic
+    file_to_write = os.path.join(directory, filename)
+    with open(file_to_write, 'w', encoding='utf-8') as file:
+        file.write(text_to_write)
+
+
+def process_encryption(m, n):
+    #Read original text file and load into variable
+    original_text = readFile(os.path.dirname(__file__), 'raw_text.txt')
 
     #Uses our custom encryption function as defined above
     encrypted_text, key_text = encrypt(original_text, m, n)
 
+    #Write the encrypted text to a new file
+    writeFile(encrypted_text, os.path.dirname(__file__), 'encrypted_text.txt')
+            
     #Save the key_text to a seperate file - in case error occurs still have code to use decryption logic
-    key_file_path = os.path.join(os.path.dirname(__file__), 'key_text.txt')
-    with open(key_file_path, 'w', encoding='utf-8') as keyfile:
-     keyfile.write(key_text)
+    writeFile(key_text, os.path.dirname(__file__), 'key_text.txt')
+
+    return original_text
 
 
-    #Creates a path for the function to save the the encrypted text and code text in the same folder as the script
-    encrypted_file_path = os.path.join(os.path.dirname(__file__), 'encrypted_text.txt')
-
-    #Opens encrypted file path, writes the encryption with UTF-8 character set then saves encrypted original text as 'encrypted_text'
-    with open(encrypted_file_path, 'w', encoding='utf-8') as outfile:
-     outfile.write(encrypted_text)
-        
+def process_decryption(m, n):
     #Read the encrypted text from file
-    with open(encrypted_file_path, 'r', encoding='utf-8') as infile:
-     encrypted_text_from_file = infile.read()
+    encrypted_text_from_file = readFile(os.path.dirname(__file__), 'encrypted_text.txt')
 
     #Read the key text from file
-    with open(key_file_path, 'r', encoding='utf-8') as keyfile:
-     key_text = keyfile.read()
-
+    key_text_from_file = readFile(os.path.dirname(__file__), 'key_text.txt')
 
     #Uses custom decryption it using the saved key and encrypted text
-    decrypted_text = decrypt(encrypted_text_from_file, key_text, m, n)
+    decrypted_text = decrypt(encrypted_text_from_file, key_text_from_file, m, n)
 
     #Save the decrypted text to file 'decrypted_text.txt'
-    decrypted_file_path = os.path.join(os.path.dirname(__file__), 'decrypted_text.txt')
-    with open(decrypted_file_path, 'w', encoding='utf-8') as outfile:
-     outfile.write(decrypted_text)
+    writeFile(decrypted_text, os.path.dirname(__file__), 'decrypted_text.txt')
 
-    #Verifies that decryption was successfull by printing true if text are matching
-    if original_text == decrypted_text:
-        print('Encryption and decryption successful.')
-    else:
-        print('Decrypted text does not match original text. Encryption and decryption unsuccessful')
+    return decrypted_text
+
+
+def check_decryption(original_text, decrypted_text):
+    return original_text == decrypted_text
+
+
+def main():
+    try:
+        #Get user imputs
+        #Requires value for m and n as an integer - which are used as parameters for the encryption function
+        m = int(input('Enter the value for m: '))
+        n = int(input('Enter the value for n: '))
+    
+        if not(isinstance(m, int)) or not(isinstance(n, int)):
+           print('Non-integer was entered. Exiting.')
+           return
+    
+        original_text = process_encryption(m, n)
+
+        decrypted_text = process_decryption(m, n)
+    
+        #Verifies that decryption was successfull by printing true if text are matching
+        if check_decryption(original_text, decrypted_text):
+            print('Encryption and decryption successful.')
+        else:
+            print('Decrypted text does not match original text. Encryption and decryption unsuccessful')
+    except:
+        print('Something went wrong. Exiting...')
         
-#Ensures main script is run only when directed
+#Only run if module is being invoked directly i.e. not being imported by another running module
 if __name__ == '__main__':
     main()

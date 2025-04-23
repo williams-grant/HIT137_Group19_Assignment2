@@ -1,26 +1,26 @@
 import turtle
 
-def draw_tree(branch_length, angle_left, angle_right, reduction_factor, recursion_depth, initial_recursion_depth): 
+def draw_tree(turtle_instance, branch_length, angle_left, angle_right, reduction_factor, recursion_depth, initial_recursion_depth): 
     if recursion_depth == 0: 
         return
 
-    turtle.pensize(recursion_depth)
+    turtle_instance.pensize(recursion_depth)
     if recursion_depth == initial_recursion_depth:
-        turtle.pencolor("brown")
+        turtle_instance.pencolor("brown")
     else:
-        turtle.pencolor("green")
+        turtle_instance.pencolor("green")
         
-    turtle.forward(branch_length)
-    turtle.left(angle_left)
+    turtle_instance.forward(branch_length)
+    turtle_instance.left(angle_left)
 
-    draw_tree(branch_length * reduction_factor, angle_left, angle_right, reduction_factor, recursion_depth - 1, initial_recursion_depth)
+    draw_tree(turtle_instance, branch_length * reduction_factor, angle_left, angle_right, reduction_factor, recursion_depth - 1, initial_recursion_depth)
 
-    turtle.right(angle_left + angle_right)
+    turtle_instance.right(angle_left + angle_right)
 
-    draw_tree(branch_length * reduction_factor, angle_left, angle_right, reduction_factor, recursion_depth - 1, initial_recursion_depth)
+    draw_tree(turtle_instance, branch_length * reduction_factor, angle_left, angle_right, reduction_factor, recursion_depth - 1, initial_recursion_depth)
 
-    turtle.left(angle_right)
-    turtle.backward(branch_length)
+    turtle_instance.left(angle_right)
+    turtle_instance.backward(branch_length)
 
 def main():
     # Taking user input
@@ -31,13 +31,15 @@ def main():
     initial_recursion_depth = float(input("Enter number of times to branch out: "))
 
     # Setting up turtle
-    turtle.speed("fastest")
-    turtle.left(90)
-    turtle.up()
-    turtle.goto(0, -200)
-    turtle.down()
+    turtle_instance = turtle.Turtle()
+    turtle_instance.getscreen()._root.attributes('-topmost', True)
+    turtle_instance.speed("fastest")
+    turtle_instance.left(90)
+    turtle_instance.up()
+    turtle_instance.goto(0, -200)
+    turtle_instance.down()
 
-    draw_tree(branch_length, angle_left, angle_right, reduction_factor, initial_recursion_depth, initial_recursion_depth)
+    draw_tree(turtle_instance, branch_length, angle_left, angle_right, reduction_factor, initial_recursion_depth, initial_recursion_depth)
 
     turtle.done()
 

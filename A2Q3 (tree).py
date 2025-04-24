@@ -1,10 +1,15 @@
+#import turtle graphic module to use for drawing tree model
 import turtle
 
+#Function for drawing tree  using turtle with several arguements for tree criteria
 def draw_tree(turtle_instance, branch_length, angle_left, angle_right, reduction_factor, recursion_depth, initial_recursion_depth): 
-    if recursion_depth == 0: 
+    if recursion_depth == 0: #Controls how many times branching occurs, will countdown and stop at 0
         return
 
+    #Defines the thickness of the trunk and brances based in recursion depth. Higher the number (depth) => closer to the trunk => thicker the line.
     turtle_instance.pensize(recursion_depth)
+
+    #First call with full depth defines our trunk, 'else' statement calls all other recursions are green to define our leafy branches following initial branching
     if recursion_depth == initial_recursion_depth:
         turtle_instance.pencolor("brown")
     else:
